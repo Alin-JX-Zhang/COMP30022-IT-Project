@@ -1,0 +1,203 @@
+html, body {
+    min-height: 100vh;
+    min-width: 100vw;
+    height:100%;
+    overflow:auto;
+    background-color: rgb(250, 244, 236);
+}
+
+.connectionsContent {
+    display:inline-block;
+    width:80%;
+    height:100%;
+    margin-top:20px;
+    margin-bottom:20px;
+    margin-left:20px;
+    position:fixed;
+    row-gap:30px;
+}
+
+.connectionsHeader {
+    position:sticky;
+    min-height:120px;
+    width:100%;
+    border-bottom: 2px;
+    border-color: rgb(163, 163, 163);
+    border-style: solid;
+    border-radius: 5px 5px 5px 5px;
+    background-color: rgba(220, 255, 255, 0.2);
+    z-index:2;
+    box-shadow:10px;
+}
+
+.connectionsHeader h1 {
+    display:inline-block;
+    font-family: 'Roboto', sans-serif;
+    font-style: bold;
+    font-size: 50px;
+    margin-top:30px;
+    margin-left:30px;
+}
+
+.addConnection {
+    display: inline-grid;
+    margin-left:40%;
+    height:60%;
+    column-gap: 30px;
+    grid-template-columns: 120px 400px;
+}
+
+.createConnection {
+    height:50%;
+}
+
+.createConnection button {
+    background-color: rgba(31, 177, 38, 0.7);
+    border-radius: 10px;
+    border-width:2px;
+    border-color: rgba(156, 156, 156,0.3);
+}
+
+.connectionSearchbar {
+    vertical-align: middle;
+    height:60%;
+}
+
+.connectionSearchbar img {
+    height: 20px;
+    vertical-align: middle;
+    margin-right:5px;
+    margin:auto;
+}
+
+.connectionSearchbar input {
+    height:100%;
+    display:inline-block;
+}
+
+.connectionSearchbar button {
+    height:100%;
+    display:inline-block;
+}
+
+.connectionSortTab {
+    position:sticky;
+    width:100%;
+    min-height:60px;
+    background-color: rgba(220, 255, 255, 0.2);
+    border-bottom: 2px;
+    border-color: rgb(163, 163, 163);
+    border-style: solid;
+    border-radius: 5px 5px 5px 5px;
+    display:grid;
+    grid-template-columns: 40% 14.5% 14.5% 13%;
+}
+
+.sortOption:first-child {
+    margin-left:20%;
+}
+
+.sortOption {
+    width:100%;
+    height:80%;
+    margin-top:10px;
+    display:inline-grid;
+    grid-template-columns: 30px 60px;
+}
+
+.sortAnchor {
+    height:30px;
+    display:inline-flex;
+}
+
+.sortOption p {
+    margin-top:7px;
+}
+
+.connectionTabContainer {
+    margin-top:10px;
+    width:100%;
+    height:75%;
+    background-color:rgba(220, 255, 255, 0.2);
+    border-radius:10px;
+    border-width: 2px;
+    border-color: rgb(163, 163, 163);
+    border-style: solid;
+    overflow-y: scroll;
+}
+
+.connectionTab {
+    overflow:visible;
+    position:relative;
+    margin-top:20px;
+    margin-left:auto;
+    margin-right:auto;
+    height: 100px;
+    width:97%;
+    border-radius: 10px;
+    background-color: rgba(164, 243, 243, 0.2);
+    display:block;
+    grid-template-columns: 40% 15% 15% 15% 15%;
+}
+
+.connectionTab p {
+    width:15%;
+    margin-top:40px;
+    display:inline-block;
+}
+
+.connectionTab:nth-child(2n) {
+    background: rgba(167, 255, 255, 0.2);
+}
+
+.connectionProfile {
+    width:40%;
+    margin-top: 20px;
+    margin-left:20px;
+    height:60px;
+    display:inline-grid;
+    grid-template-columns: 70px 400px;
+    column-gap: 10px;
+}
+
+.connectionAvatar img {
+    width:60px;
+    height:60px;
+    border-radius: 50%;
+}
+
+.connectionInfo {
+    display:inline-grid;
+    grid-template-rows: 50% 50%;
+    text-align: left;
+}
+
+.connectionName {
+    font-size: x-large;
+    margin-top:0px;
+}
+
+.dropdownButton {
+    margin-top:30px;
+    background-color: white;
+    width:60px;
+    height:30px;
+}
+
+.connectionDropdown {
+    display: none;
+    position: relative;
+    width:100%;
+    height:300px;
+    background-color:white;
+}
+
+.connectionDropdown p {
+    width: 100xp;
+    height:30xp;
+    display: inline-block;
+}
+
+.dropdownButton:hover + .connectionDropdown{
+    display:block;
+}

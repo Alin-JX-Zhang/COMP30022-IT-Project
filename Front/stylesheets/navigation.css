@@ -1,0 +1,120 @@
+html, body {
+    min-height: 100vh;
+    min-width: 100vw;
+    height:100%;
+}
+
+#navigationBar {
+    width:250px;
+    height:100%;
+    overflow-x:auto;
+    padding-right: 20px;
+    position: sticky;
+}
+
+.profileSection {
+    top:0px;
+    height:100px;
+    width:250px;
+    display:block;
+    background-color: rgba(220, 255, 255, 0.2);
+    border-radius: 0 0 10px 0;
+    border-right: 2px;
+    border-bottom: 2px;
+    border-style: solid;
+    border-color: rgba(100, 100, 100, 0.3);
+}
+
+.profileSection:hover{
+    background-color: rgba(142, 253, 253, 0.2);
+}
+
+.profileAvatar {
+    margin-top:10px;
+    margin-left:10px;
+    height:70%;
+    width:auto;
+    display:inline-block;
+    border-radius:50%;
+}
+
+.profileAvatar img{
+    width:100%;
+    height:100%;
+    border:2px;
+    border-radius:50%;
+    border-style: solid;
+    border-color: rgba(100, 100, 100, 0.3);
+}
+
+.profileInfo {
+    vertical-align: top;
+    margin-top:15px;
+    margin-left:10px;
+    height: 100%;
+    display: inline-block;
+    color:black;
+}
+
+.profileName {
+    font-size: x-large;
+    font-family: 'Roboto', sans-serif;
+    display: block;
+}
+
+.profileSubtext{
+    margin-top: 8px;
+    font-size:medium;
+    font-style: italic;
+    font-family: "Roboto", sans-serif;
+    display: block;
+}
+
+.subnavSection {
+    height: 89.5%;
+    width: 80px;
+    display: block;
+    overflow-y:visible;
+    overflow-x:visible;
+}
+
+.subnavSection a:last-child {
+    border-radius: 0 0 10px 0;
+}
+
+.subnavSection a:hover {
+    background-color: rgba(142, 253, 253, 0.2);
+    width: 290%;
+    border-radius: 0 10px 10px 0;
+}
+
+.subnavSection a:first-child:hover {
+    border-radius: 0 0 10px 0;
+}
+
+.subnavButton {
+    display: block;
+    height: 95px;
+    width: 100%;
+    margin:-2px;
+    border-top: 1px;
+    border-bottom: 2px;
+    border-right: 2px;
+    border-style: solid;
+    border-color:rgba(100, 100, 100, 0.3);
+    background-color: rgba(220, 255, 255, 0.2);
+    transition-duration: 100ms;
+    text-align: center;
+    font-size: small;
+    color:black;
+    text-decoration: none;
+}
+
+.subnavIcon {
+    position:relative;
+    width:70px !important;
+    height:70px !important;
+    margin-left:5px;
+    margin-top:10px;
+    display:block;
+}
