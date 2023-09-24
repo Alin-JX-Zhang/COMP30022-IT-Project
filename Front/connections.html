@@ -6,12 +6,19 @@
         <title>Connections</title>
         <link rel="stylesheet" href="stylesheets/reset.css">
         <link rel="stylesheet" href="stylesheets/connections.css">
-        <script src="navigationLoader.js"></script>
+        <script
+        src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+        <script>
+            $(function () {
+                $("#navigationBar").load("navigation.html");
+            });
+        </script>
     </head>
     <body>
         <!-- Navigation bar-->
         <div id="navigationBar"></div>
-        <iframe src="navigation.html" style="border:none;height:99%;display:inline-block;width:280px"></iframe>
         <!-- Connections content-->
         <div class="connectionsContent">
 
