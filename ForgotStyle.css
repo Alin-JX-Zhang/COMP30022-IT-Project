@@ -14,7 +14,6 @@ body {
 
 .container {
     height: 100%;
-    font-family: "Playfair Display";
     background-image: linear-gradient(to right,#FFD6C2,#FCCB8F);
 }
 
@@ -29,8 +28,9 @@ body {
     top:50%;
     transform: translate(-50%,-50%);
 }
+
 .login-wrapper .header {
-    font-size:  30px;
+    font-size: 25px;
     font-weight: bold;
     text-align: center;
     line-height: 200px;
@@ -46,31 +46,18 @@ body {
     font-size: 20px;
     outline: none;
     background: #C1F1F8;
-    font-family: "Playfair Display";
 }
 
 
 
 .login-wrapper .form-wrapper .btn {
-    width: 50px;
     text-align: center;
-    padding: 10px;
-    margin:0 auto;
+    padding: 5px;
+    margin-top: 20px;
     background: #C1F1F8;
-    color: #fff;
-    font-family: "Playfair Display";
-    text-decoration-line: none;
+    color: black;
 }
 
-.login-wrapper  .msg {
-    text-align: center;
-    line-height: 50px;
-    font-family: "Playfair Display";
-}
-
-.login-wrapper .msg a {
-    text-decoration-line:  none;
-    color: #a6c1ee;
-    font-family: "Playfair Display";
-    text-align-all: left;
+.login-wrapper .form-wrapper .btn a{
+    text-underline: none;
 }
