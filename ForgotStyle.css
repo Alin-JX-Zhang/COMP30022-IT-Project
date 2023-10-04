@@ -1,8 +1,6 @@
 * {
     padding: 0;
     margin: 0;
-
-    letter-spacing: .05em;
 }
 html {
     height: 100%;
@@ -10,11 +8,14 @@ html {
 
 body {
     height: 100%;
+    margin:0;
+    padding: 0;
 }
 
 .container {
     height: 100%;
-    background-image: linear-gradient(to right,#FFD6C2,#FCCB8F);
+    background: linear-gradient(to right,#FFD6C2,#FCCB8F);
+    margin: 0;
 }
 
 .login-wrapper {
@@ -33,9 +34,13 @@ body {
     font-size: 25px;
     font-weight: bold;
     text-align: center;
-    line-height: 200px;
+    line-height: 150px;
 }
 
+.text{
+    font-weight: bold;
+
+}
 .login-wrapper .form-wrapper .input-item {
     display: inline;
     width: 100%;
@@ -46,18 +51,13 @@ body {
     font-size: 20px;
     outline: none;
     background: #C1F1F8;
+    margin-top: 20px;
 }
-
-
 
 .login-wrapper .form-wrapper .btn {
     text-align: center;
     padding: 5px;
-    margin-top: 20px;
+    margin: 20px 100px;
     background: #C1F1F8;
-    color: black;
-}
-
-.login-wrapper .form-wrapper .btn a{
-    text-underline: none;
+    width: 130px;
 }
