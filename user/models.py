@@ -1,49 +1,59 @@
 from django.db import models
 
-
-# `ProfileID` int(11) NOT NULL AUTO_INCREMENT COMMENT '简介ID',
-# `Email` varchar(20) DEFAULT NULL COMMENT '邮件',
-# `Phone` varchar(20) DEFAULT NULL COMMENT '手机',
-# `SecureLevel` int(11) NOT NULL COMMENT '安全级别',
-# `BrithDate` datetime DEFAULT NULL COMMENT '生日',
-# Personal information table
+# Create your models here.
 class Profile(models.Model):
-    ProfileID = models.AutoField(primary_key=True, db_column='ProfileID')
-    Email = models.CharField(max_length=20, db_column='Email')
-    Phone = models.CharField(max_length=20, db_column='Phone')
-    SecureLevel = models.IntegerField(db_column='SecureLevel')
-    BrithDate = models.DateTimeField(db_column='BrithDate')
+    email = models.CharField(max_length=40, blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    secureLevel = models.IntegerField(default=1)
+    brithDate = models.DateTimeField(null=True)
 
-    class Meta:
-        db_table = 'Profile'
-
-    def to_dict(self):
-        return {
-            'ProfileID': self.ProfileID,
-            'Email': self.Email,
-            'Phone': self.Phone,
-            'SecureLevel': self.SecureLevel,
-            'BrithDate': self.BrithDate
-        }
-
-
-# Account table
 class Account(models.Model):
-    AccountID = models.AutoField(primary_key=True, db_column='AccountID')
-    PassWord = models.CharField(max_length=20, db_column='PassWord')
-    UserName = models.CharField(max_length=20, db_column='UserName')
-    Authority = models.IntegerField(db_column='Authority')
-    ProfileID = models.IntegerField(db_column='ProfileID')
+    username = models.CharField(unique=True, max_length=20)
+    password = models.CharField(max_length=20)
+    authority = models.IntegerField(default=1)
+    profileid = models.ForeignKey(Profile,on_delete=models.DO_NOTHING,blank=True, null=True)
 
-    class Meta:
-        db_table = 'Account'
 
-    def to_dict(self):
-        return {
-            'AccountID': self.AccountID,
-            # 'PassWord': self.PassWord,
-            'UserName': self.UserName,
-            'Authority': self.Authority,
-            'ProfileID': self.ProfileID,
-            'Profile': Profile.objects.get(ProfileID=self.ProfileID).to_dict()
-        }
+class Address(models.Model):
+    country = models.CharField(max_length=20)
+    state = models.CharField(max_length=20)
+    city = models.CharField( max_length=20)
+    street = models.CharField(max_length=20)
+    profileid = models.OneToOneField(Profile, on_delete=models.CASCADE, primary_key=True)
+
+
+class Event(models.Model):
+    eventNote = models.CharField(max_length=200, blank=True, null=True)
+    eventAddress = models.CharField(max_length=100, blank=True, null=True)
+    participantsid = models.ForeignKey(Profile, models.DO_NOTHING, null=True)
+    startDate = models.DateTimeField()
+    endDate = models.DateTimeField()
+    accountid = models.ForeignKey(Account, on_delete=models.CASCADE, blank=True, null=True)
+
+class Name(models.Model):
+    firstName = models.CharField(max_length=20)
+    lastName = models.CharField(max_length=20)
+    midName = models.CharField(max_length=20, blank=True, null=True)
+    profileid = models.OneToOneField(Profile, on_delete=models.CASCADE, primary_key=True)
+
+
+
+class Task(models.Model):
+    startDate = models.DateTimeField(null=True)
+    endDate = models.DateTimeField(null=True)
+    status = models.IntegerField(null=True)
+    accountid = models.ForeignKey(Account, models.DO_NOTHING,blank=True, null=True)
+    eventid = models.ForeignKey(Event, models.DO_NOTHING,blank=True, null=True)
+
+
+
+class Verification(models.Model):
+    email = models.CharField(max_length=50,unique=True)
+    phone = models.CharField(max_length=20)
+    securityQuestion = models.CharField( max_length=100, blank=True, null=True)
+    securityAnswer = models.CharField(max_length=45, blank=True, null=True)
+    accountid = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
+
+
+class Test(models.Model):
+    name = models.CharField(max_length=100)
