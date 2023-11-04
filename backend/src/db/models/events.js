@@ -14,6 +14,22 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
       },
 
+      name: {
+        type: DataTypes.TEXT,
+      },
+
+      note: {
+        type: DataTypes.TEXT,
+      },
+
+      startTime: {
+        type: DataTypes.DATE,
+      },
+
+      endTime: {
+        type: DataTypes.DATE,
+      },
+
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,
@@ -28,6 +44,15 @@ module.exports = function (sequelize, DataTypes) {
   );
 
   events.associate = (db) => {
+    db.events.belongsToMany(db.connections, {
+      as: 'involved',
+      foreignKey: {
+        name: 'events_involvedId',
+      },
+      constraints: false,
+      through: 'eventsInvolvedConnections',
+    });
+
     /// loop through entities and it's fields, and if ref === current e[name] and create relation has many on parent entity
 
     //end loop

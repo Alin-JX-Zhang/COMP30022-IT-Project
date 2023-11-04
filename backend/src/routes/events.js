@@ -16,6 +16,13 @@ const { parse } = require('json2csv');
  *        type: object
  *        properties:
 
+ *          name:
+ *            type: string
+ *            default: name
+ *          note:
+ *            type: string
+ *            default: note
+
  */
 
 /**
@@ -214,7 +221,7 @@ router.get(
     const filetype = req.query.filetype;
     const payload = await EventsDBApi.findAll(req.query);
     if (filetype && filetype === 'csv') {
-      const fields = ['id'];
+      const fields = ['id', 'name', 'note', 'startTime', 'endTime'];
       const opts = { fields };
       try {
         const csv = parse(payload.rows, opts);

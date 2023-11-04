@@ -30,9 +30,7 @@ const UsersSelectItem = (props) => {
         return undefined;
       }
 
-      let label = originalValue.label
-        ? originalValue.label
-        : originalValue.firstName;
+      let label = originalValue.label ? originalValue.label : originalValue.id;
 
       return {
         id: originalValue.id,

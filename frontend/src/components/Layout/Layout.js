@@ -44,18 +44,6 @@ import TasksFormPage from 'pages/CRUD/Tasks/form/TasksFormPage';
 import TasksFormPageView from 'pages/CRUD/Tasks/form/TasksFormPageView';
 import TasksTablePage from 'pages/CRUD/Tasks/table/TasksTablePage';
 
-import AccountsFormPage from 'pages/CRUD/Accounts/form/AccountsFormPage';
-import AccountsFormPageView from 'pages/CRUD/Accounts/form/AccountsFormPageView';
-import AccountsTablePage from 'pages/CRUD/Accounts/table/AccountsTablePage';
-
-import ProfilesFormPage from 'pages/CRUD/Profiles/form/ProfilesFormPage';
-import ProfilesFormPageView from 'pages/CRUD/Profiles/form/ProfilesFormPageView';
-import ProfilesTablePage from 'pages/CRUD/Profiles/table/ProfilesTablePage';
-
-import NotesFormPage from 'pages/CRUD/Notes/form/NotesFormPage';
-import NotesFormPageView from 'pages/CRUD/Notes/form/NotesFormPageView';
-import NotesTablePage from 'pages/CRUD/Notes/table/NotesTablePage';
-
 const Redirect = (props) => {
   useEffect(() => window.location.replace(props.url));
   return <span>Redirecting...</span>;
@@ -162,53 +150,6 @@ function Layout(props) {
             exact
             component={TasksFormPageView}
           />
-
-          <Route path={'/admin/accounts'} exact component={AccountsTablePage} />
-          <Route
-            path={'/admin/accounts/new'}
-            exact
-            component={AccountsFormPage}
-          />
-          <Route
-            path={'/admin/accounts/:id/edit'}
-            exact
-            component={AccountsFormPage}
-          />
-          <Route
-            path={'/admin/accounts/:id/show'}
-            exact
-            component={AccountsFormPageView}
-          />
-
-          <Route path={'/admin/profiles'} exact component={ProfilesTablePage} />
-          <Route
-            path={'/admin/profiles/new'}
-            exact
-            component={ProfilesFormPage}
-          />
-          <Route
-            path={'/admin/profiles/:id/edit'}
-            exact
-            component={ProfilesFormPage}
-          />
-          <Route
-            path={'/admin/profiles/:id/show'}
-            exact
-            component={ProfilesFormPageView}
-          />
-
-          <Route path={'/admin/notes'} exact component={NotesTablePage} />
-          <Route path={'/admin/notes/new'} exact component={NotesFormPage} />
-          <Route
-            path={'/admin/notes/:id/edit'}
-            exact
-            component={NotesFormPage}
-          />
-          <Route
-            path={'/admin/notes/:id/show'}
-            exact
-            component={NotesFormPageView}
-          />
         </Switch>
         <Fab
           color='primary'
@@ -224,11 +165,11 @@ function Layout(props) {
           <div>
             <Link
               color={'primary'}
-              href={'https://unimelb.edu.au'}
+              href={'https://www.unimelb.edu.au/'}
               target={'_blank'}
               className={classes.link}
             >
-              IT Project Unimelb 2023
+              Unimelb IT-Project 2023
             </Link>
           </div>
         </Footer>

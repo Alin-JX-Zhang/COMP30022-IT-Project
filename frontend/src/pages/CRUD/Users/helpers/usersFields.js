@@ -44,6 +44,40 @@ const usersFields = {
     ],
   },
 
+  Gender: {
+    type: 'enum',
+    label: 'Gender',
+
+    options: [
+      { value: 'Male', label: 'Male' },
+
+      { value: 'Female', label: 'Female' },
+
+      { value: 'Other', label: 'Other' },
+    ],
+  },
+
+  birthday: {
+    type: 'date',
+    label: 'Birthday',
+
+    options: [{ value: 'value', label: 'value' }],
+  },
+
+  preferredName: {
+    type: 'string',
+    label: 'Preferred Name',
+
+    options: [{ value: 'value', label: 'value' }],
+  },
+
+  headline: {
+    type: 'string',
+    label: 'Headline',
+
+    options: [{ value: 'value', label: 'value' }],
+  },
+
   password: { type: 'string', label: 'Password' },
 };
 

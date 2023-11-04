@@ -225,6 +225,7 @@ const EditUser = () => {
                       value={data?.role || ''}
                       name='email'
                       onChange={handleChange}
+                      disabled
                     >
                       <MenuItem value={'admin'}>Admin</MenuItem>
                       <MenuItem value={'user'}>User</MenuItem>
@@ -276,7 +277,7 @@ const EditUser = () => {
                     .PNG, .JPG, .JPEG
                   </Typography>
                   <TextField
-                    label='Name'
+                    label='First Name'
                     variant='outlined'
                     defaultValue='Name'
                     value={data && data.firstName}
@@ -285,19 +286,43 @@ const EditUser = () => {
                     style={{ marginBottom: 35 }}
                   />
                   <TextField
-                    label='Last Name'
+                    label='Preferred Name'
                     variant='outlined'
-                    defaultValue={'Last Name'}
-                    value={data && data.lastName}
-                    name='lastName'
+                    defaultValue='Preferred Name'
+                    value={data && data.firstName}
                     onChange={handleChange}
                     style={{ marginBottom: 35 }}
                   />
                   <TextField
+                    label='Last Name'
+                    variant='outlined'
+                    defaultValue={''}
+                    value={data && data.lastName}
+                    onChange={handleChange}
+                    style={{ marginBottom: 35 }}
+                  />
+                  <FormControl variant='outlined' style={{ marginBottom: 35 }}>
+                    <InputLabel id='demo-simple-select-outlined-label'>
+                      Gender
+                    </InputLabel>
+                    <Select
+                      labelId='demo-simple-select-outlined-label'
+                      label='Gender'
+                      id='demo-simple-select-outlined'
+                      defaultValue=''
+                      value={data?.gender || ''}
+                      onChange={handleChange}
+                    >
+                      <MenuItem value={'male'}>Male</MenuItem>
+                      <MenuItem value={'female'}>Female</MenuItem>
+                      <MenuItem value={'other'}>Other</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <TextField
                     label='Phone'
                     variant='outlined'
                     style={{ marginBottom: 35 }}
-                    defaultValue={'1-555-666-7070'}
+                    defaultValue={''}
                     value={data && data.phone}
                     name='phone'
                     onChange={handleChange}
@@ -307,11 +332,19 @@ const EditUser = () => {
                     variant='outlined'
                     style={{ marginBottom: 35 }}
                     type={'email'}
-                    defaultValue={'Jane@gmail.com'}
+                    defaultValue={''}
                     value={data && data.email}
                     name='email'
                     onChange={handleChange}
                     disabled
+                  />
+                  <TextField
+                    label='Headline'
+                    variant='outlined'
+                    style={{ marginBottom: 35 }}
+                    defaultValue={''}
+                    value={data && data.headline}
+                    onChange={handleChange}
                   />
                 </>
               ) : tab === 2 ? (

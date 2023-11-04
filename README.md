@@ -66,7 +66,9 @@
 
 Please ensure you have the following tools installed:
   `npm`
+
   `yarn`
+
   `nvm` optional
 
 ### Node.js 
@@ -82,7 +84,9 @@ If your Node.js version is not v16.x.x, please install the node version manager 
 Then change to Node.js v16 with:
 
 `nvm install 16`
+
 `nvm use 16`
+
 `node -v`
 
 ### Backend:
@@ -140,6 +144,13 @@ Then give that new user privileges to the new database then quit the `psql`.
   ------------
 
 #### Create database:
+
+`cd src/db/`
+
+Fill the `password: ''` section in `db.config.js` with postgres superuser password
+
+`cd ../../`
+
 `yarn db:create`
 
 #### Start local deployment:

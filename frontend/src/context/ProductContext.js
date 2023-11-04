@@ -128,7 +128,7 @@ export function getProductsImages(dispatch) {
     return data.map((c) => {
       return c.replace(
         /http:\/\/.+\//,
-        'https://flatlogic-node-backend.herokuapp.com/assets/products/',
+        '',
       );
     });
   };

@@ -26,9 +26,6 @@ export default makeStyles((theme) => ({
     h3: {
       textAlign: 'center',
     },
-    p: {
-      textAlign: 'center',
-    },
 
     '@media (max-width: 767.98px)': {
       width: '520px',
@@ -46,6 +43,11 @@ export default makeStyles((theme) => ({
     },
   },
 
+  h3: {
+    fontSize: '50px',
+    textAlign: 'center',
+  },
+
   img: {
     margin: '1rem 0',
     width: '350px',
@@ -56,7 +58,7 @@ export default makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%',
+    width: '60%',
   },
   a: {
     width: '100%',

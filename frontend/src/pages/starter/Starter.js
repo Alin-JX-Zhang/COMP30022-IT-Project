@@ -13,7 +13,7 @@ function Starter() {
   return (
     <div className={classes.root}>
       <div className={classes.starterBlock}>
-        <h3 className='my-3 align-self-center'>
+        <h3>
           Welcome to Folkus!
         </h3>
         <div className={classes.buttons}>

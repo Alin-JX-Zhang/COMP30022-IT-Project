@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { ArrowBack as ArrowBackIcon } from '@mui/icons-material';
+import { ArrowBack as ArrowBackIcon, Task } from '@mui/icons-material';
 import { Drawer, IconButton, List } from '@mui/material';
 import { useTheme } from '@mui/material';
 import { withRouter } from 'react-router-dom';
@@ -13,6 +13,10 @@ import {
 import {
   Home as HomeIcon,
   Apps as CoreIcon,
+  People as UsersIcon,
+  RecentActors as ConnectionsIcon,
+  Assignment as TaskIcon,
+  EventNote as EventIcon,
   Description as DocumentationIcon,
   AccountCircle as ProfileIcon,
 } from '@mui/icons-material';
@@ -128,7 +132,7 @@ function Sidebar({ location, structure }) {
             link='/admin/users'
             location={location}
             isSidebarOpened={isSidebarOpenedWrapper}
-            icon={<CoreIcon />}
+            icon={<UsersIcon />}
             toggleDrawer={toggleDrawer(true)}
           />
         }
@@ -139,7 +143,7 @@ function Sidebar({ location, structure }) {
             link='/admin/connections'
             location={location}
             isSidebarOpened={isSidebarOpenedWrapper}
-            icon={<CoreIcon />}
+            icon={<ConnectionsIcon />}
             toggleDrawer={toggleDrawer(true)}
           />
         }
@@ -150,7 +154,7 @@ function Sidebar({ location, structure }) {
             link='/admin/events'
             location={location}
             isSidebarOpened={isSidebarOpenedWrapper}
-            icon={<CoreIcon />}
+            icon={<EventIcon />}
             toggleDrawer={toggleDrawer(true)}
           />
         }
@@ -161,29 +165,7 @@ function Sidebar({ location, structure }) {
             link='/admin/tasks'
             location={location}
             isSidebarOpened={isSidebarOpenedWrapper}
-            icon={<CoreIcon />}
-            toggleDrawer={toggleDrawer(true)}
-          />
-        }
-
-        {
-          <SidebarLink
-            label='Profiles'
-            link='/admin/profiles'
-            location={location}
-            isSidebarOpened={isSidebarOpenedWrapper}
-            icon={<CoreIcon />}
-            toggleDrawer={toggleDrawer(true)}
-          />
-        }
-
-        {
-          <SidebarLink
-            label='Notes'
-            link='/admin/notes'
-            location={location}
-            isSidebarOpened={isSidebarOpenedWrapper}
-            icon={<CoreIcon />}
+            icon={<TaskIcon />}
             toggleDrawer={toggleDrawer(true)}
           />
         }

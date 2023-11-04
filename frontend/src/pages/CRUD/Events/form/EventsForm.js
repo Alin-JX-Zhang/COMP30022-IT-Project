@@ -25,6 +25,8 @@ import PreparedValues from 'components/FormItems/preparedValues';
 import FormValidations from 'components/FormItems/formValidations';
 import Widget from 'components/Widget';
 
+import ConnectionsSelectItem from 'pages/CRUD/Connections/helpers/ConnectionsSelectItem';
+
 const EventsForm = (props) => {
   const {
     isEditing,
@@ -66,7 +68,41 @@ const EventsForm = (props) => {
       >
         {(form) => (
           <form onSubmit={form.handleSubmit}>
-            <Grid container spacing={3} direction='column'></Grid>
+            <Grid container spacing={3} direction='column'>
+              <Grid item>
+                <InputFormItem name={'name'} schema={eventsFields} autoFocus />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'note'} schema={eventsFields} />
+              </Grid>
+
+              <Grid item>
+                <ConnectionsSelectItem
+                  name={'involved'}
+                  schema={eventsFields}
+                  showCreate={!modal}
+                  multiple
+                  form={form}
+                />
+              </Grid>
+
+              <Grid item>
+                <DatePickerFormItem
+                  name={'startTime'}
+                  schema={eventsFields}
+                  showTimeInput
+                />
+              </Grid>
+
+              <Grid item>
+                <DatePickerFormItem
+                  name={'endTime'}
+                  schema={eventsFields}
+                  showTimeInput
+                />
+              </Grid>
+            </Grid>
             <Grid container spacing={3} mt={2}>
               <Grid item>
                 <Button

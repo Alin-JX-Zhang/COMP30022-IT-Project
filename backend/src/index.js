@@ -22,12 +22,6 @@ const eventsRoutes = require('./routes/events');
 
 const tasksRoutes = require('./routes/tasks');
 
-const accountsRoutes = require('./routes/accounts');
-
-const profilesRoutes = require('./routes/profiles');
-
-const notesRoutes = require('./routes/notes');
-
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -35,7 +29,7 @@ const options = {
       version: '1.0.0',
       title: 'Folkus',
       description:
-        'Folkus web app',
+        'Folkus, a CRM web app',
     },
     servers: [
       {
@@ -107,24 +101,6 @@ app.use(
   '/api/tasks',
   passport.authenticate('jwt', { session: false }),
   tasksRoutes,
-);
-
-app.use(
-  '/api/accounts',
-  passport.authenticate('jwt', { session: false }),
-  accountsRoutes,
-);
-
-app.use(
-  '/api/profiles',
-  passport.authenticate('jwt', { session: false }),
-  profilesRoutes,
-);
-
-app.use(
-  '/api/notes',
-  passport.authenticate('jwt', { session: false }),
-  notesRoutes,
 );
 
 const publicDir = path.join(__dirname, '../public');

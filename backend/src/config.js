@@ -36,7 +36,7 @@ const config = {
   },
   uploadDir: os.tmpdir(),
   email: {
-    from: 'Folkus <app@folkus.app>',
+    from: 'Folkus <app@flatlogic.app>',
     host: 'email-smtp.us-east-1.amazonaws.com',
     port: 587,
     auth: {

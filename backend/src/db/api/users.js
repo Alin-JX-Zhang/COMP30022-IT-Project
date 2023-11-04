@@ -36,6 +36,10 @@ module.exports = class UsersDBApi {
         provider: data.data.provider || null,
         role: data.data.role || 'user',
 
+        Gender: data.data.Gender || null,
+        birthday: data.data.birthday || null,
+        preferredName: data.data.preferredName || null,
+        headline: data.data.headline || null,
         importHash: data.data.importHash || null,
         createdById: currentUser.id,
         updatedById: currentUser.id,
@@ -81,6 +85,10 @@ module.exports = class UsersDBApi {
       provider: item.provider || null,
       role: item.role || 'user',
 
+      Gender: item.Gender || null,
+      birthday: item.birthday || null,
+      preferredName: item.preferredName || null,
+      headline: item.headline || null,
       importHash: item.importHash || null,
       createdById: currentUser.id,
       updatedById: currentUser.id,
@@ -139,6 +147,10 @@ module.exports = class UsersDBApi {
         provider: data.provider || null,
         role: data.role || 'user',
 
+        Gender: data.Gender || null,
+        birthday: data.birthday || null,
+        preferredName: data.preferredName || null,
+        headline: data.headline || null,
         updatedById: currentUser.id,
       },
       { transaction },
@@ -287,6 +299,20 @@ module.exports = class UsersDBApi {
         };
       }
 
+      if (filter.preferredName) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike('users', 'preferredName', filter.preferredName),
+        };
+      }
+
+      if (filter.headline) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike('users', 'headline', filter.headline),
+        };
+      }
+
       if (filter.emailVerificationTokenExpiresAtRange) {
         const [start, end] = filter.emailVerificationTokenExpiresAtRange;
 
@@ -335,6 +361,30 @@ module.exports = class UsersDBApi {
         }
       }
 
+      if (filter.birthdayRange) {
+        const [start, end] = filter.birthdayRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            birthday: {
+              ...where.birthday,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            birthday: {
+              ...where.birthday,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
       if (
         filter.active === true ||
         filter.active === 'true' ||
@@ -365,6 +415,13 @@ module.exports = class UsersDBApi {
         where = {
           ...where,
           role: filter.role,
+        };
+      }
+
+      if (filter.Gender) {
+        where = {
+          ...where,
+          Gender: filter.Gender,
         };
       }
 
@@ -437,21 +494,21 @@ module.exports = class UsersDBApi {
       where = {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
-          Utils.ilike('users', 'firstName', query),
+          Utils.ilike('users', 'id', query),
         ],
       };
     }
 
     const records = await db.users.findAll({
-      attributes: ['id', 'firstName'],
+      attributes: ['id', 'id'],
       where,
       limit: limit ? Number(limit) : undefined,
-      orderBy: [['firstName', 'ASC']],
+      orderBy: [['id', 'ASC']],
     });
 
     return records.map((record) => ({
       id: record.id,
-      label: record.firstName,
+      label: record.id,
     }));
   }
 

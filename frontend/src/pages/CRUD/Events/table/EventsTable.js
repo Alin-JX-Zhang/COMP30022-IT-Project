@@ -1,6 +1,9 @@
 // eslint-disable-next-line
 import * as dataFormat from 'pages/CRUD/Events/table/EventsDataFormatters';
 
+// eslint-disable-next-line
+import * as connectionsDataFormat from 'pages/CRUD/Connections/table/ConnectionsDataFormatters';
+
 import actions from 'actions/events/eventsListActions';
 import actionsEvents from 'actions/events/eventsFormActions';
 import React, { useRef, useState } from 'react';
@@ -73,7 +76,10 @@ const EventsTable = () => {
   const linkCsvDownload = useRef(null);
   const [width, setWidth] = useState(window.innerWidth);
 
-  const [filters, setFilters] = useState([]);
+  const [filters, setFilters] = useState([
+    { label: 'Name', title: 'name' },
+    { label: 'Note', title: 'note' },
+  ]);
 
   const [filterItems, setFilterItems] = useState([]);
   const [filterUrl, setFilterUrl] = useState('');
@@ -279,6 +285,83 @@ const EventsTable = () => {
   }
 
   const columns = [
+    {
+      field: 'name',
+
+      flex: 0.6,
+      editable: true,
+
+      headerName: 'Name',
+    },
+
+    {
+      field: 'note',
+
+      flex: 0.6,
+      editable: true,
+
+      headerName: 'Note',
+    },
+
+    {
+      field: 'involved',
+
+      sortable: false,
+      renderCell: (params) =>
+        connectionsDataFormat.listFormatter(
+          params.row[params.field],
+          history,
+          'connections',
+        ),
+      flex: 1,
+
+      editable: true,
+      type: 'singleSelect',
+      valueFormatter: ({ value }) =>
+        dataFormat.connectionsManyListFormatter(value).join(', '),
+      renderEditCell: (params) => {
+        params = {
+          ...params,
+          value: _.map(params.value, (value) => {
+            return value.id ?? value;
+          }),
+        };
+        return (
+          <DataGridMultiSelect
+            {...params}
+            entityName={'connections'}
+            nameRow={'name'}
+          />
+        );
+      },
+
+      headerName: 'Involved',
+    },
+
+    {
+      field: 'startTime',
+
+      renderCell: (params) => dataFormat.dateTimeFormatter(params.value),
+      editable: true,
+      type: 'dateTime',
+      valueGetter: (GridValueGetterParams) =>
+        new Date(GridValueGetterParams.row.startTime),
+
+      headerName: 'Start Time',
+    },
+
+    {
+      field: 'endTime',
+
+      renderCell: (params) => dataFormat.dateTimeFormatter(params.value),
+      editable: true,
+      type: 'dateTime',
+      valueGetter: (GridValueGetterParams) =>
+        new Date(GridValueGetterParams.row.endTime),
+
+      headerName: 'End Time',
+    },
+
     {
       field: 'id',
       headerName: 'Actions',
@@ -549,21 +632,6 @@ const EventsTable = () => {
           />
         </div>
 
-        {
-          <div>
-            <LinkMaterial
-              color={'primary'}
-              target={'_blank'}
-              href={
-                process.env.NODE_ENV === 'production'
-                  ? window.location.origin + '/api-docs/#/Events'
-                  : 'http://localhost:8080/api-docs/#/Events'
-              }
-            >
-              API documentation for events
-            </LinkMaterial>
-          </div>
-        }
       </Widget>
 
       <Dialog

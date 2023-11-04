@@ -74,6 +74,30 @@ module.exports = function (sequelize, DataTypes) {
         values: ['admin', 'user'],
       },
 
+      Gender: {
+        type: DataTypes.ENUM,
+
+        values: ['Male', 'Female', 'Other'],
+      },
+
+      birthday: {
+        type: DataTypes.DATEONLY,
+
+        get: function () {
+          return this.getDataValue('birthday')
+            ? moment.utc(this.getDataValue('birthday')).format('YYYY-MM-DD')
+            : null;
+        },
+      },
+
+      preferredName: {
+        type: DataTypes.TEXT,
+      },
+
+      headline: {
+        type: DataTypes.TEXT,
+      },
+
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,

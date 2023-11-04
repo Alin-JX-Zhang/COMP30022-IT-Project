@@ -16,6 +16,13 @@ const { parse } = require('json2csv');
  *        type: object
  *        properties:
 
+ *          task:
+ *            type: string
+ *            default: task
+ *          details:
+ *            type: string
+ *            default: details
+
  *          
  */
 
@@ -215,7 +222,7 @@ router.get(
     const filetype = req.query.filetype;
     const payload = await TasksDBApi.findAll(req.query);
     if (filetype && filetype === 'csv') {
-      const fields = ['id'];
+      const fields = ['id', 'task', 'details', 'dueTime'];
       const opts = { fields };
       try {
         const csv = parse(payload.rows, opts);

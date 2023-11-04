@@ -12,7 +12,7 @@ module.exports = {
   development: {
     username: 'postgres',
     dialect: 'postgres',
-    password: '',
+    password: '653277',
     database: 'db_folkus',
     host: process.env.DEV_DB_HOST || 'localhost',
     logging: console.log,

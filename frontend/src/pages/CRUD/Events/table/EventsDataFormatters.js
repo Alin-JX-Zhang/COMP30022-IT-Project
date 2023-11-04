@@ -68,6 +68,25 @@ function filesFormatter(cell, key) {
   );
 }
 
+function connectionsManyListFormatter(val) {
+  if (!val || !val.length) return [];
+  return val.map((item) => item.id);
+}
+function connectionsOneListFormatter(val) {
+  if (!val) return '';
+  return val.name;
+}
+function connectionsManyListFormatterEdit(val) {
+  if (!val || !val.length) return [];
+  return val.map((item) => {
+    return { id: item.id, label: item.name };
+  });
+}
+function connectionsOneListFormatterEdit(val) {
+  if (!val) return '';
+  return { label: val.name, id: val.id };
+}
+
 function listFormatter(cell, history, entity) {
   if (!cell) return null;
 
@@ -103,4 +122,8 @@ export {
   listFormatter,
   filesFormatter,
   dataGridEditFormatter,
+  connectionsOneListFormatterEdit,
+  connectionsManyListFormatterEdit,
+  connectionsOneListFormatter,
+  connectionsManyListFormatter,
 };

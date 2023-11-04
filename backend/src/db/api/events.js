@@ -15,12 +15,20 @@ module.exports = class EventsDBApi {
       {
         id: data.id || undefined,
 
+        name: data.name || null,
+        note: data.note || null,
+        startTime: data.startTime || null,
+        endTime: data.endTime || null,
         importHash: data.importHash || null,
         createdById: currentUser.id,
         updatedById: currentUser.id,
       },
       { transaction },
     );
+
+    await events.setInvolved(data.involved || [], {
+      transaction,
+    });
 
     return events;
   }
@@ -33,6 +41,10 @@ module.exports = class EventsDBApi {
     const eventsData = data.map((item) => ({
       id: item.id || undefined,
 
+      name: item.name || null,
+      note: item.note || null,
+      startTime: item.startTime || null,
+      endTime: item.endTime || null,
       importHash: item.importHash || null,
       createdById: currentUser.id,
       updatedById: currentUser.id,
@@ -56,10 +68,18 @@ module.exports = class EventsDBApi {
 
     await events.update(
       {
+        name: data.name || null,
+        note: data.note || null,
+        startTime: data.startTime || null,
+        endTime: data.endTime || null,
         updatedById: currentUser.id,
       },
       { transaction },
     );
+
+    await events.setInvolved(data.involved || [], {
+      transaction,
+    });
 
     return events;
   }
@@ -97,6 +117,10 @@ module.exports = class EventsDBApi {
 
     const output = events.get({ plain: true });
 
+    output.involved = await events.getInvolved({
+      transaction,
+    });
+
     return output;
   }
 
@@ -111,7 +135,22 @@ module.exports = class EventsDBApi {
 
     const transaction = (options && options.transaction) || undefined;
     let where = {};
-    let include = [];
+    let include = [
+      {
+        model: db.connections,
+        as: 'involved',
+        through: filter.involved
+          ? {
+              where: {
+                [Op.or]: filter.involved.split('|').map((item) => {
+                  return { ['Id']: Utils.uuid(item) };
+                }),
+              },
+            }
+          : null,
+        required: filter.involved ? true : null,
+      },
+    ];
 
     if (filter) {
       if (filter.id) {
@@ -119,6 +158,68 @@ module.exports = class EventsDBApi {
           ...where,
           ['id']: Utils.uuid(filter.id),
         };
+      }
+
+      if (filter.name) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike('events', 'name', filter.name),
+        };
+      }
+
+      if (filter.note) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike('events', 'note', filter.note),
+        };
+      }
+
+      if (filter.startTimeRange) {
+        const [start, end] = filter.startTimeRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            startTime: {
+              ...where.startTime,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            startTime: {
+              ...where.startTime,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.endTimeRange) {
+        const [start, end] = filter.endTimeRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            endTime: {
+              ...where.endTime,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            endTime: {
+              ...where.endTime,
+              [Op.lte]: end,
+            },
+          };
+        }
       }
 
       if (

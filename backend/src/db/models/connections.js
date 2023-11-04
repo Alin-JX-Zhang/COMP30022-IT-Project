@@ -25,7 +25,34 @@ module.exports = function (sequelize, DataTypes) {
       status: {
         type: DataTypes.ENUM,
 
-        values: ['Online', 'Offline'],
+        values: ['Connected', 'Disconnected'],
+      },
+
+      gender: {
+        type: DataTypes.ENUM,
+
+        values: ['Male', 'Female', 'Other'],
+      },
+
+      birthday: {
+        type: DataTypes.DATEONLY,
+
+        get: function () {
+          return this.getDataValue('birthday')
+            ? moment.utc(this.getDataValue('birthday')).format('YYYY-MM-DD')
+            : null;
+        },
+      },
+
+      headline: {
+        type: DataTypes.TEXT,
+      },
+
+      registered: {
+        type: DataTypes.BOOLEAN,
+
+        allowNull: false,
+        defaultValue: false,
       },
 
       importHash: {

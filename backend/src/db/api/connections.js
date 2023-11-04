@@ -18,6 +18,11 @@ module.exports = class ConnectionsDBApi {
         name: data.name || null,
         email: data.email || null,
         status: data.status || null,
+        gender: data.gender || null,
+        birthday: data.birthday || null,
+        headline: data.headline || null,
+        registered: data.registered || false,
+
         importHash: data.importHash || null,
         createdById: currentUser.id,
         updatedById: currentUser.id,
@@ -39,6 +44,11 @@ module.exports = class ConnectionsDBApi {
       name: item.name || null,
       email: item.email || null,
       status: item.status || null,
+      gender: item.gender || null,
+      birthday: item.birthday || null,
+      headline: item.headline || null,
+      registered: item.registered || false,
+
       importHash: item.importHash || null,
       createdById: currentUser.id,
       updatedById: currentUser.id,
@@ -67,6 +77,11 @@ module.exports = class ConnectionsDBApi {
         name: data.name || null,
         email: data.email || null,
         status: data.status || null,
+        gender: data.gender || null,
+        birthday: data.birthday || null,
+        headline: data.headline || null,
+        registered: data.registered || false,
+
         updatedById: currentUser.id,
       },
       { transaction },
@@ -149,6 +164,37 @@ module.exports = class ConnectionsDBApi {
         };
       }
 
+      if (filter.headline) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike('connections', 'headline', filter.headline),
+        };
+      }
+
+      if (filter.birthdayRange) {
+        const [start, end] = filter.birthdayRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            birthday: {
+              ...where.birthday,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            birthday: {
+              ...where.birthday,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
       if (
         filter.active === true ||
         filter.active === 'true' ||
@@ -165,6 +211,20 @@ module.exports = class ConnectionsDBApi {
         where = {
           ...where,
           status: filter.status,
+        };
+      }
+
+      if (filter.gender) {
+        where = {
+          ...where,
+          gender: filter.gender,
+        };
+      }
+
+      if (filter.registered) {
+        where = {
+          ...where,
+          registered: filter.registered,
         };
       }
 
@@ -237,21 +297,21 @@ module.exports = class ConnectionsDBApi {
       where = {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
-          Utils.ilike('connections', 'id', query),
+          Utils.ilike('connections', 'name', query),
         ],
       };
     }
 
     const records = await db.connections.findAll({
-      attributes: ['id', 'id'],
+      attributes: ['id', 'name'],
       where,
       limit: limit ? Number(limit) : undefined,
-      orderBy: [['id', 'ASC']],
+      orderBy: [['name', 'ASC']],
     });
 
     return records.map((record) => ({
       id: record.id,
-      label: record.id,
+      label: record.name,
     }));
   }
 };

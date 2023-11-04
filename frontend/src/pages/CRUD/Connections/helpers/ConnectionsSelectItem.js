@@ -30,7 +30,9 @@ const ConnectionsSelectItem = (props) => {
         return undefined;
       }
 
-      let label = originalValue.label ? originalValue.label : originalValue.id;
+      let label = originalValue.label
+        ? originalValue.label
+        : originalValue.name;
 
       return {
         id: originalValue.id,

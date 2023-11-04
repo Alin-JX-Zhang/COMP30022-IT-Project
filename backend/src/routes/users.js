@@ -28,9 +28,19 @@ const { parse } = require('json2csv');
  *          email:
  *            type: string
  *            default: email
+ *          preferredName:
+ *            type: string
+ *            default: preferredName
+ *          headline:
+ *            type: string
+ *            default: headline
 
  *          
  *          role:
+ *            type: string
+ *            default: user
+ *          
+ *          Gender:
  *            type: string
  *            default: user
  */
@@ -231,7 +241,17 @@ router.get(
     const filetype = req.query.filetype;
     const payload = await UsersDBApi.findAll(req.query);
     if (filetype && filetype === 'csv') {
-      const fields = ['id', 'firstName', 'lastName', 'phoneNumber', 'email'];
+      const fields = [
+        'id',
+        'firstName',
+        'lastName',
+        'phoneNumber',
+        'email',
+        'preferredName',
+        'headline',
+
+        'birthday',
+      ];
       const opts = { fields };
       try {
         const csv = parse(payload.rows, opts);

@@ -1,10 +1,10 @@
 export const mockUser = {
   avatars: [],
   id: '98cea92c-84e5-4c0d-ac21-9998f4b23883',
-  firstName: 'John Doe',
+  firstName: 'Admin',
   authenticationUid: null,
   avatar: null,
-  createdAt: '2023-11-12T11:04:00.864Z',
+  createdAt: '2020-05-12T11:04:00.864Z',
   createdById: null,
   deletedAt: null,
   disabled: false,

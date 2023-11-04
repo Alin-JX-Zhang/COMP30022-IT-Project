@@ -78,6 +78,8 @@ const UsersTable = () => {
     { label: 'Last Name', title: 'lastName' },
     { label: 'Phone Number', title: 'phoneNumber' },
     { label: 'E-Mail', title: 'email' },
+    { label: 'Preferred Name', title: 'preferredName' },
+    { label: 'Headline', title: 'headline' },
   ]);
 
   const [filterItems, setFilterItems] = useState([]);
@@ -285,12 +287,32 @@ const UsersTable = () => {
 
   const columns = [
     {
+      field: 'avatar',
+
+      sortable: false,
+      renderCell: function (params) {
+        return dataFormat.imageFormatter(params.row, this.field);
+      },
+
+      headerName: 'Avatar',
+    },
+
+    {
       field: 'firstName',
 
       flex: 0.6,
       editable: true,
 
       headerName: 'First Name',
+    },
+
+    {
+      field: 'preferredName',
+
+      flex: 0.6,
+      editable: true,
+
+      headerName: 'Preferred Name',
     },
 
     {
@@ -319,28 +341,6 @@ const UsersTable = () => {
 
       headerName: 'E-Mail',
     },
-
-    {
-      field: 'disabled',
-
-      renderCell: (params) => dataFormat.booleanFormatter(params.row),
-      editable: true,
-      type: 'boolean',
-
-      headerName: 'Disabled',
-    },
-
-    {
-      field: 'avatar',
-
-      sortable: false,
-      renderCell: function (params) {
-        return dataFormat.imageFormatter(params.row, this.field);
-      },
-
-      headerName: 'Avatar',
-    },
-
     {
       field: 'role',
 
@@ -348,7 +348,33 @@ const UsersTable = () => {
       type: 'singleSelect',
       valueOptions: ['admin', 'user'],
 
-      headerName: '',
+      headerName: 'role',
+    },
+
+    {
+      field: 'Gender',
+
+      editable: true,
+      type: 'singleSelect',
+      valueOptions: ['Male', 'Female', 'Other'],
+
+      headerName: 'Gender',
+    },
+
+    {
+      field: 'birthday',
+
+      headerName: 'Birthday',
+    },
+
+
+    {
+      field: 'headline',
+
+      flex: 0.6,
+      editable: true,
+
+      headerName: 'Headline',
     },
 
     {
@@ -620,22 +646,6 @@ const UsersTable = () => {
             autoHeight
           />
         </div>
-
-        {
-          <div>
-            <LinkMaterial
-              color={'primary'}
-              target={'_blank'}
-              href={
-                process.env.NODE_ENV === 'production'
-                  ? window.location.origin + '/api-docs/#/Users'
-                  : 'http://localhost:8080/api-docs/#/Users'
-              }
-            >
-              API documentation for users
-            </LinkMaterial>
-          </div>
-        }
       </Widget>
 
       <Dialog

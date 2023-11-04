@@ -52,8 +52,33 @@ const TasksForm = (props) => {
           <form>
             <Grid container spacing={3} direction='column'>
               <Grid item>
+                <Typography variant='h6' style={{ marginBottom: 10 }}>
+                  {tasksFields['task'].label}
+                </Typography>
+                <Typography>{form.values.task}</Typography>
+              </Grid>
+
+              <Grid item>
+                <Typography variant='h6' style={{ marginBottom: 10 }}>
+                  {tasksFields['dueTime'].label}
+                </Typography>
+                <Typography>
+                  {form.values.dueTime.toLocaleDateString() +
+                    ' ' +
+                    form.values.dueTime.toLocaleTimeString().slice(0, -6)}
+                </Typography>
+              </Grid>
+
+              <Grid item>
+                <Typography variant='h6' style={{ marginBottom: 10 }}>
+                  {tasksFields['details'].label}
+                </Typography>
+                <Typography>{form.values.details}</Typography>
+              </Grid>
+
+              <Grid item>
                 <RadioFormItem
-                  name={'status'}
+                  name={'taskStatus'}
                   schema={tasksFields}
                   disabled={true}
                 />

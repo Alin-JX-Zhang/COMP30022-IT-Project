@@ -15,7 +15,10 @@ module.exports = class TasksDBApi {
       {
         id: data.id || undefined,
 
-        status: data.status || null,
+        task: data.task || null,
+        dueTime: data.dueTime || null,
+        details: data.details || null,
+        taskStatus: data.taskStatus || null,
         importHash: data.importHash || null,
         createdById: currentUser.id,
         updatedById: currentUser.id,
@@ -34,7 +37,10 @@ module.exports = class TasksDBApi {
     const tasksData = data.map((item) => ({
       id: item.id || undefined,
 
-      status: item.status || null,
+      task: item.task || null,
+      dueTime: item.dueTime || null,
+      details: item.details || null,
+      taskStatus: item.taskStatus || null,
       importHash: item.importHash || null,
       createdById: currentUser.id,
       updatedById: currentUser.id,
@@ -58,7 +64,10 @@ module.exports = class TasksDBApi {
 
     await tasks.update(
       {
-        status: data.status || null,
+        task: data.task || null,
+        dueTime: data.dueTime || null,
+        details: data.details || null,
+        taskStatus: data.taskStatus || null,
         updatedById: currentUser.id,
       },
       { transaction },
@@ -124,6 +133,44 @@ module.exports = class TasksDBApi {
         };
       }
 
+      if (filter.task) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike('tasks', 'task', filter.task),
+        };
+      }
+
+      if (filter.details) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike('tasks', 'details', filter.details),
+        };
+      }
+
+      if (filter.dueTimeRange) {
+        const [start, end] = filter.dueTimeRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            dueTime: {
+              ...where.dueTime,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            dueTime: {
+              ...where.dueTime,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
       if (
         filter.active === true ||
         filter.active === 'true' ||
@@ -136,10 +183,10 @@ module.exports = class TasksDBApi {
         };
       }
 
-      if (filter.status) {
+      if (filter.taskStatus) {
         where = {
           ...where,
-          status: filter.status,
+          taskStatus: filter.taskStatus,
         };
       }
 

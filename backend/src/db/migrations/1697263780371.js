@@ -381,17 +381,6 @@ module.exports = {
       );
 
       await queryInterface.addColumn(
-        'tasks',
-        'status',
-        {
-          type: Sequelize.DataTypes.ENUM,
-
-          values: ['TODO', 'IN PROGRESS', 'COMPLETED'],
-        },
-        { transaction },
-      );
-
-      await queryInterface.addColumn(
         'users',
         'role',
         {
@@ -408,7 +397,7 @@ module.exports = {
         {
           type: Sequelize.DataTypes.ENUM,
 
-          values: ['Online', 'Offline'],
+          values: ['Connected', 'Disconnected'],
         },
         { transaction },
       );
@@ -435,8 +424,6 @@ module.exports = {
       });
 
       await queryInterface.removeColumn('users', 'role', { transaction });
-
-      await queryInterface.removeColumn('tasks', 'status', { transaction });
 
       await queryInterface.removeColumn('connections', 'email', {
         transaction,

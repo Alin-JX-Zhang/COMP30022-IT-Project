@@ -101,6 +101,32 @@ const UsersForm = (props) => {
                 />
               </Grid>
 
+              <Grid item>
+                <RadioFormItem
+                  name={'Gender'}
+                  schema={usersFields}
+                  disabled={true}
+                />
+              </Grid>
+
+              <Grid item>
+                <DatePickerFormItem name={'birthday'} schema={usersFields} />
+              </Grid>
+
+              <Grid item>
+                <Typography variant='h6' style={{ marginBottom: 10 }}>
+                  {usersFields['preferredName'].label}
+                </Typography>
+                <Typography>{form.values.preferredName}</Typography>
+              </Grid>
+
+              <Grid item>
+                <Typography variant='h6' style={{ marginBottom: 10 }}>
+                  {usersFields['headline'].label}
+                </Typography>
+                <Typography>{form.values.headline}</Typography>
+              </Grid>
+
               <Grid container ml={3} mt={3}>
                 <Grid item>
                   <Button

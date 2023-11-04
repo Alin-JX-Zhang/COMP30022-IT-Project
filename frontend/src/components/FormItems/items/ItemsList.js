@@ -7,7 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
-export default function BooksList({ tableName, items, name }) {
+export default function BooksList({ tableName, items, name, nameRow }) {
   tableName = tableName.replace(tableName[0], tableName[0].toUpperCase());
   return (
     <Box sx={{ border: 1, borderRadius: 3, borderColor: '#D8D9DA' }}>
@@ -31,7 +31,7 @@ export default function BooksList({ tableName, items, name }) {
                 component='a'
                 href={`#/admin/${name}/${item.id}/show`}
               >
-                <ListItemText primary={item.title} />
+                <ListItemText primary={item[nameRow]} />
               </ListItemButton>
             </ListItem>
           ))}

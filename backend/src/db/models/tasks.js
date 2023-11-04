@@ -14,10 +14,22 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
       },
 
-      status: {
+      task: {
+        type: DataTypes.TEXT,
+      },
+
+      dueTime: {
+        type: DataTypes.DATE,
+      },
+
+      details: {
+        type: DataTypes.TEXT,
+      },
+
+      taskStatus: {
         type: DataTypes.ENUM,
 
-        values: ['TODO', 'IN PROGRESS', 'COMPLETED'],
+        values: ['To-Do', 'In-Progress', 'Finished'],
       },
 
       importHash: {

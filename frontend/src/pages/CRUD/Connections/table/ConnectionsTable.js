@@ -76,6 +76,7 @@ const ConnectionsTable = () => {
   const [filters, setFilters] = useState([
     { label: 'Name', title: 'name' },
     { label: 'Email', title: 'email' },
+    { label: 'Headline', title: 'headline' },
   ]);
 
   const [filterItems, setFilterItems] = useState([]);
@@ -305,9 +306,44 @@ const ConnectionsTable = () => {
 
       editable: true,
       type: 'singleSelect',
-      valueOptions: ['Online', 'Offline'],
+      valueOptions: ['Connected', 'Disconnected'],
 
       headerName: 'Status',
+    },
+
+    {
+      field: 'gender',
+
+      editable: true,
+      type: 'singleSelect',
+      valueOptions: ['Male', 'Female', 'Other'],
+
+      headerName: 'Gender',
+    },
+
+    {
+      field: 'birthday',
+
+      headerName: 'Birthday',
+    },
+
+    {
+      field: 'headline',
+
+      flex: 0.6,
+      editable: true,
+
+      headerName: 'Headline',
+    },
+
+    {
+      field: 'registered',
+
+      renderCell: (params) => dataFormat.booleanFormatter(params.row),
+      editable: false,
+      type: 'boolean',
+
+      headerName: 'Registered',
     },
 
     {
@@ -579,22 +615,6 @@ const ConnectionsTable = () => {
             autoHeight
           />
         </div>
-
-        {
-          <div>
-            <LinkMaterial
-              color={'primary'}
-              target={'_blank'}
-              href={
-                process.env.NODE_ENV === 'production'
-                  ? window.location.origin + '/api-docs/#/Connections'
-                  : 'http://localhost:8080/api-docs/#/Connections'
-              }
-            >
-              API documentation for connections
-            </LinkMaterial>
-          </div>
-        }
       </Widget>
 
       <Dialog

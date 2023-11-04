@@ -65,10 +65,9 @@ function Login(props) {
   let [isLoading, setIsLoading] = useState(false);
   let [error, setError] = useState(null);
   let [activeTabId, setActiveTabId] = useState(+tab ?? 0);
-  let [nameValue, setNameValue] = useState('');
-  let [loginValue, setLoginValue] = useState('admin@folkus.com');
+  let [loginValue, setLoginValue] = useState('');
   let [newUserEmailValue, setNewUserEmailValue] = useState('');
-  let [passwordValue, setPasswordValue] = useState('password');
+  let [passwordValue, setPasswordValue] = useState('');
   let [newUserPasswordValue, setNewUserPasswordValue] = useState('');
   let [forgotEmail, setForgotEmail] = useState('');
   let [isForgot, setIsForgot] = useState(false);
@@ -78,7 +77,7 @@ function Login(props) {
   };
 
   let isSingUpFormValid = () => {
-    return newUserEmailValue && newUserPasswordValue?.length >= 3 && nameValue;
+    return newUserEmailValue && newUserPasswordValue?.length >= 3;
   };
 
   let loginOnEnterKey = (event) => {
@@ -257,21 +256,6 @@ function Login(props) {
                       Something is wrong with your login or password :(
                     </Typography>
                   </Grow>
-                  <Input
-                    id='name'
-                    InputProps={{
-                      classes: {
-                        underline: classes.InputUnderline,
-                        input: classes.Input,
-                      },
-                    }}
-                    value={nameValue}
-                    onChange={(e) => setNameValue(e.target.value)}
-                    margin='normal'
-                    placeholder='Full Name'
-                    type='email'
-                    fullWidth
-                  />
                   <Input
                     id='email'
                     InputProps={{

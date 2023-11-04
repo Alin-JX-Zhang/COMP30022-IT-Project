@@ -90,8 +90,8 @@ function listFormatter(cell, history, entity) {
     <div>
       {cell &&
         cell.length &&
-        cell.map((value) => getContent(value.id, value.id))}
-      {cell && getContent(cell.id, cell.id)}
+        cell.map((value) => getContent(value.id, value.name))}
+      {cell && getContent(cell.id, cell.name)}
     </div>
   );
 }
